@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nola Vanualailai | Portfolio</title>
+    
+    <!-- Google Fonts: Inter for main text, Roboto Mono for accents -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables - Brittany Chiang V4 Theme */
+        :root {
+            --navy: #0a192f;
+            --light-navy: #112240;
+            --lightest-navy: #233554;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --white: #e6f1ff;
+            --green: #64ffda;
+            --green-tint: rgba(100, 255, 218, 0.1);
+            
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: var(--slate);
+            font-family: var(--font-sans);
+            font-size: 20px;
+            line-height: 1.3;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background-color: var(--lightest-navy);
+            color: var(--lightest-slate);
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            text-decoration-skip-ink: auto;
+            color: inherit;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        a.inline-link {
+            color: var(--green);
+        }
+
+        a.inline-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--green);
+            transition: var(--transition);
+        }
+
+        a.inline-link:hover::after {
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--lightest-slate);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        p {
+            margin: 0 0 15px 0;
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Layout */
+        main {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 1600px;
+            min-height: 100vh;
+            padding: 0 150px;
+        }
+
+        section {
+            margin: 0 auto;
+            padding: 100px 0;
+            max-width: 1000px;
+        }
+
+        /* Numbered Headings */
+        .numbered-heading {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: 10px 0 40px;
+            width: 100%;
+            font-size: clamp(26px, 5vw, 32px);
+            white-space: nowrap;
+        }
+
+        .numbered-heading::before {
+            position: relative;
+            bottom: 4px;
+            counter-increment: section;
+            content: "0" counter(section) ".";
+            margin-right: 10px;
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: clamp(16px, 3vw, 20px);
+            font-weight: 400;
+        }
+
+        .numbered-heading::after {
+            content: "";
+            display: block;
+            position: relative;
+            top: -5px;
+            width: 300px;
+            height: 1px;
+            margin-left: 20px;
+            background-color: var(--lightest-navy);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 11;
+            padding: 0 50px;
+            width: 100%;
+            height: 100px;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .logo {
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            counter-reset: item 0;
+        }
+
+        .nav-links ol {
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 5px;
+            position: relative;
+            counter-increment: item 1;
+            font-size: 13px;
+        }
+
+        .nav-links a {
+            padding: 10px;
+            color: var(--lightest-slate);
+            font-family: var(--font-mono);
+        }
+
+        .nav-links a::before {
+            content: "0" counter(item) ".";
+            margin-right: 5px;
+            color: var(--green);
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .resume-button {
+            color: var(--green);
+            background-color: transparent;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            margin-left: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .resume-button:hover {
+            background-color: var(--green-tint);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 100px 0 0; /* Pushed down to avoid overlap with the fixed nav */
+        }
+
+        .hero h1 {
+            margin: 0 0 30px 4px;
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: clamp(14px, 5vw, 16px);
+            font-weight: 400;
+        }
+
+        /* Matches the paragraph style exactly */
+        .hero h2 {
+            margin: 0;
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--slate);
+            line-height: 1.5;
+        }
+
+        /* Matches the paragraph style exactly */
+        .hero h3 {
+            margin: 10px 0 0 0;
+            font-family: var(--font-sans);
+            color: var(--slate);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .hero p {
+            margin: 20px 0 0;
+            max-width: 540px;
+            color: var(--slate);
+            font-family: var(--font-sans);
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        .hero .email-link {
+            color: var(--green);
+            background-color: transparent;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            padding: 1.25rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            margin-top: 50px;
+        }
+
+        .hero .email-link:hover {
+            background-color: var(--green-tint);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+        }
+
+        .about-text p {
+            font-size: 18px;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(140px, 200px));
+            gap: 0 10px;
+            padding: 0;
+            margin: 20px 0 0 0;
+            overflow: hidden;
+            list-style: none;
+        }
+
+        .skills-list li {
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--slate);
+        }
+
+        .skills-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-size: 14px;
+        }
+
+        .about-pic {
+            position: relative;
+            max-width: 300px;
+        }
+
+        .wrapper {
+            display: block;
+            position: relative;
+            width: 100%;
+            border-radius: 4px;
+            background-color: var(--green);
+        }
+
+        .wrapper::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            transition: var(--transition);
+            top: 0;
+            left: 0;
+            background-color: var(--navy);
+            mix-blend-mode: screen;
+            z-index: 3;
+        }
+
+        .wrapper::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--green);
+            border-radius: 4px;
+            transition: var(--transition);
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+        }
+
+        .wrapper:hover::after {
+            top: 15px;
+            left: 15px;
+        }
+
+        .wrapper img {
+            position: relative;
+            border-radius: 4px;
+            mix-blend-mode: multiply;
+            filter: grayscale(100%) contrast(1);
+            transition: var(--transition);
+            width: 100%;
+            max-width: 100%;
+            vertical-align: middle;
+            background: var(--lightest-navy); /* Placeholder background */
+            height: 300px; /* Placeholder height */
+        }
+
+        .wrapper:hover img {
+            filter: none;
+            mix-blend-mode: normal;
+        }
+        
+        .wrapper:hover::before {
+            background-color: transparent;
+        }
+
+        /* Experience Section */
+        .experience-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card {
+            margin-bottom: 40px;
+        }
+
+        .job-title {
+            color: var(--lightest-slate);
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: var(--green);
+        }
+
+        .job-date {
+            color: var(--light-slate);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .job-details {
+            padding: 0;
+            list-style: none;
+        }
+
+        .job-details li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: var(--slate);
+        }
+
+        .job-details li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+        }
+
+        /* Projects (Course Modules) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            height: 100%;
+            padding: 2rem 1.75rem;
+            border-radius: 4px;
+            background-color: var(--light-navy);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .project-card:hover h3 {
+            color: var(--green);
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            width: 100%;
+        }
+
+        .folder svg {
+            width: 40px;
+            height: 40px;
+            color: var(--green);
+        }
+
+        .project-links {
+            display: flex;
+            align-items: center;
+            color: var(--light-slate);
+        }
+
+        .project-links a {
+            padding: 5px 7px;
+        }
+
+        .project-links a:hover {
+            color: var(--green);
+        }
+
+        .project-links svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .project-title {
+            margin: 0 0 10px;
+            color: var(--lightest-slate);
+            font-size: 22px;
+            transition: var(--transition);
+        }
+
+        .project-description {
+            color: var(--light-slate);
+            font-size: 17px;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            align-items: flex-end;
+            flex-grow: 1;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 20px 0 0 0;
+            list-style: none;
+        }
+
+        .project-tech li {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.75;
+            color: var(--slate);
+            margin-right: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 100px;
+        }
+
+        .contact .overline {
+            display: block;
+            margin-bottom: 20px;
+            color: var(--green);
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .contact .overline::before {
+            counter-increment: section;
+            content: "0" counter(section) ". What's Next?";
+        }
+
+        .contact h2 {
+            font-size: clamp(40px, 5vw, 60px);
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            margin-bottom: 50px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--slate);
+        }
+
+        footer a {
+            padding: 10px;
+        }
+
+        footer a:hover {
+            color: var(--green);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Responsive */
+        @media (max-width: 1080px) {
+            main { padding: 0 100px; }
+        }
+        @media (max-width: 768px) {
+            main { padding: 0 50px; }
+            nav { padding: 0 25px; }
+            .nav-links { display: none; } /* Hide links on mobile for simplicity in this build */
+            .about-content { grid-template-columns: 1fr; }
+            .numbered-heading::after { width: 100%; }
+        }
+        @media (max-width: 480px) {
+            main { padding: 0 25px; }
+        }
+
+    </style>
+</head>
+<body style="counter-reset: section;">
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="#">NV</a>
+        </div>
+        <div class="nav-links">
+            <ol>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Course Modules</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ol>
+            <a href="#" class="resume-button" target="_blank" rel="noopener noreferrer">Resume</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <h1 class="fade-in delay-1">Hi, my name is</h1>
+            <h2 class="fade-in delay-2">Nola Vanualailai.</h2>
+            <h3 class="fade-in delay-3">I build data solutions for public health.</h3>
+            <p class="fade-in delay-4">
+                I'm a Data and Reporting Officer based in Fiji, specializing in NCD data management, surveillance systems, and regional capacity building across all 22 Pacific Island Countries and Territories. Currently participating in the <em>Generative AI for Work & Research</em> cohort.
+            </p>
+            <div class="fade-in delay-5">
+                <a href="#projects" class="email-link">Check out my course projects!</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="numbered-heading">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Hello! My name is Nola and I enjoy transforming complex health data into actionable insights. My journey in public health data started over 10 years ago, and I've developed a deep understanding of Pacific health systems along the way.
+                    </p>
+                    <p>
+                        Currently, I am the <strong>Data and Reporting Officer (NCD)</strong> at the <a href="#" class="inline-link">Pacific Community (SPC)</a> in Suva, Fiji. My main focus is on database development, data visualisation, and strengthening national NCD data capacity through technical support and training.
+                    </p>
+                    <p>
+                        I hold an MSc in Computing and Information Systems and an MPH in Biostatistics. I am constantly exploring new technologies, including Generative AI, to enhance reporting methodologies and data accuracy.
+                    </p>
+                    <p>Here are a few technologies and tools I've been working with recently:</p>
+                    <ul class="skills-list">
+                        <li>MS Excel (Advanced)</li>
+                        <li>MS Access (VBA)</li>
+                        <li>Power BI</li>
+                        <li>Python & Matplotlib</li>
+                        <li>WHO STEPS Methodology</li>
+                        <li>Generative AI Tools</li>
+                    </ul>
+                </div>
+                <div class="about-pic">
+                    <div clas="wrapper">
+                        <!-- Placeholder for your photo -->
+                        <img src="nola.jpg" alt="Nola Vanualailai">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section (CV) -->
+        <section id="experience">
+            <h2 class="numbered-heading">Where I've Worked</h2>
+            
+            <div class="experience-container">
+                <div class="job-card">
+                    <h3 class="job-title">Data and Reporting Officer (NCD) <span class="company">@ Pacific Community (SPC)</span></h3>
+                    <p class="job-date">Suva, Fiji | Current</p>
+                    <ul class="job-details">
+                        <li>Designed and developed a registry system using Microsoft Access with hub-and-spoke architecture and VBA automation, enabling real-time NCD data capture and reducing manual reporting errors.</li>
+                        <li>Provide direct technical support in developing national NCD data collection tools, database structures, and data quality protocols across multiple Pacific Island Countries.</li>
+                        <li>Compile and analyse NCD workplace screening data, producing comprehensive epidemiological reports with trend analysis for national stakeholders.</li>
+                        <li>Facilitate training for in-country data entry staff across multiple PICTs, delivering hands-on database setup and data cleaning protocols to strengthen national capacity.</li>
+                    </ul>
+                </div>
+
+                <div class="job-card">
+                    <h3 class="job-title">STEPS Survey Data Support <span class="company">@ WHO (Project Collaboration)</span></h3>
+                    <p class="job-date">Regional</p>
+                    <ul class="job-details">
+                        <li>Supported WHO STEPS survey implementation across multiple Pacific Island Countries.</li>
+                        <li>Contributed to survey design, established robust data entry systems, and managed analytical outputs.</li>
+                        <li>Authored and contributed to official WHO STEPS Reports for multiple countries in the region.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects / Course Modules Section -->
+        <section id="projects">
+            <h2 class="numbered-heading">Featured Projects & GenAI Modules</h2>
+            <p style="color: var(--slate); margin-bottom: 20px;">
+                Below are the active modules and projects from <em>The GRAPH Courses' Generative AI for Work & Research</em> cohort.
+            </p>
+            
+            <div class="projects-grid">
+                
+                <!-- Module 1 -->
+                <div class="project-card">
+                    <header>
+                        <div class="project-top">
+                            <div class="folder">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><title>Folder</title><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><title>GitHub</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                                <a href="#" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title>External Link</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title"><a href="#">Personal Portfolio Website</a></h3>
+                        <div class="project-description">
+                            <p>Created a professional project website using no-code AI tools. Formatted documents efficiently and styled them into a deployable portfolio.</p>
+                        </div>
+                    </header>
+                    <footer>
+                        <ul class="project-tech">
+                            <li>ChatGPT Canvas</li>
+                            <li>HTML/CSS</li>
+                            <li>Replit</li>
+                        </ul>
+                    </footer>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="project-card">
+                    <header>
+                        <div class="project-top">
+                            <div class="folder">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><title>Folder</title><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title>External Link</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title"><a href="#">AI-Automated Data Analysis</a></h3>
+                        <div class="project-description">
+                            <p>Processed datasets transparently and visualized results responsibly. Built automated dashboards and batch file conversion workflows.</p>
+                        </div>
+                    </header>
+                    <footer>
+                        <ul class="project-tech">
+                            <li>Julius</li>
+                            <li>Code Interpreter</li>
+                            <li>Windsurf</li>
+                        </ul>
+                    </footer>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="project-card">
+                    <header>
+                        <div class="project-top">
+                            <div class="folder">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><title>Folder</title><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title>External Link</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title"><a href="#">GenAI for Text Analysis</a></h3>
+                        <div class="project-description">
+                            <p>Implemented text classification, sentiment analysis, and designed automated summarization workflows for rapid literature reviews.</p>
+                        </div>
+                    </header>
+                    <footer>
+                        <ul class="project-tech">
+                            <li>Elicit</li>
+                            <li>LiteRev</li>
+                            <li>Knowledge Maps</li>
+                        </ul>
+                    </footer>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="project-card">
+                    <header>
+                        <div class="project-top">
+                            <div class="folder">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><title>Folder</title><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title>External Link</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title"><a href="#">Custom Public Health Chatbot</a></h3>
+                        <div class="project-description">
+                            <p>Built a custom interactive chatbot using RAG architecture to support specific task assistance and health data knowledge management.</p>
+                        </div>
+                    </header>
+                    <footer>
+                        <ul class="project-tech">
+                            <li>RAG Systems</li>
+                            <li>Custom GPT</li>
+                            <li>Botpress</li>
+                        </ul>
+                    </footer>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="project-card">
+                    <header>
+                        <div class="project-top">
+                            <div class="folder">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><title>Folder</title><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title>External Link</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title"><a href="#">AI Task Automation Agent</a></h3>
+                        <div class="project-description">
+                            <p>Designed responsible AI agents to monitor literature and orchestrated app-to-app workflows to save time on repetitive research tasks.</p>
+                        </div>
+                    </header>
+                    <footer>
+                        <ul class="project-tech">
+                            <li>AI Agents</li>
+                            <li>Email Automation</li>
+                            <li>Browser Control</li>
+                        </ul>
+                    </footer>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="project-card">
+                    <header>
+                        <div class="project-top">
+                            <div class="folder">
+                                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><title>Folder</title><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" aria-label="External Link"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title>External Link</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title"><a href="#">Research Communication Assets</a></h3>
+                        <div class="project-description">
+                            <p>Generated transparent summaries and designed accurate visuals, video abstracts, and diagrams for engaging research dissemination.</p>
+                        </div>
+                    </header>
+                    <footer>
+                        <ul class="project-tech">
+                            <li>Data Viz</li>
+                            <li>Prompt Eng</li>
+                            <li>Video Abstracts</li>
+                        </ul>
+                    </footer>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2 class="overline"></h2>
+            <h2 class="title">Get In Touch</h2>
+            <p>
+                Although I’m currently focused on my role at the Pacific Community, my inbox is always open. Whether you have a question about Pacific health data, Generative AI applications, or just want to say hi, I'll try my best to get back to you!
+            </p>
+            <a class="email-link" href="#" target="_blank" rel="noopener noreferrer">Say Hello</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <a href="https://v4.brittanychiang.com/" target="_blank" rel="noopener noreferrer">
+                Designed & Built with inspiration from Brittany Chiang
+            </a>
+        </div>
+        <div style="margin-top: 5px;">
+            &copy; 2026 Nola Vanualailai
+        </div>
+    </footer>
+
+</body>
+</html>
